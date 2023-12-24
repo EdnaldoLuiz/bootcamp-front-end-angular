@@ -1,3 +1,4 @@
+import Pokemon from './pokemon.js'
 
 const pokeApi = {}
 

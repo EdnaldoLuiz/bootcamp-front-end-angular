@@ -1,0 +1,14 @@
+{
+  "name": "pokedex",
+  "version": "1.0.0",
+  "description": "Bem-vindo ao Desafio da Pokédex! Este projeto foi desenvolvido como parte dos Desafios de Projeto na Digital Innovation One (DIO). Nele, exploramos a importância do Git/GitHub e aplicamos os fundamentos de desenvolvimento web utilizando JavaScript. Vamos mergulhar no emocionante mundo Pokémon e criar uma Pokédex incrível!",
+  "main": "main.js",
+  "scripts": {
+    "start": "http-server -p 3333"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "http-server": "^14.1.1"
+  }
+}
