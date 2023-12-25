@@ -3,9 +3,14 @@ body, h1, h2, ul, li {
     padding: 0;
 }
 
+html, body {
+    overflow-x: hidden;
+}
+
 body {
     font-family: 'Roboto', sans-serif;
     background-color: #333;
+    height: 100vh;
 }
 
 header {
@@ -17,22 +22,48 @@ header {
     align-items: center;
 }
 
+.logo img {
+    width: 240px;
+}
+
 .search-container {
     display: flex;
     gap: 10px;
 }
 
+.search-bar {
+    display: flex;
+    align-items: center;
+}
+
 #searchInput {
-    padding: 5px;
+    padding: 8px;
     border: 1px solid #555;
     border-radius: 5px;
+    margin-right: 10px; 
+    background-color: #222; 
+    color: #fff; 
+    outline: none; 
+}
+
+#searchInput::placeholder {
+    color: #888; 
 }
 
 #searchButton {
     background-color: #555;
     color: #fff;
     border: none;
-    padding: 5px 10px;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#loadMoreButton {
+    background-color: #555;
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
     border-radius: 5px;
     cursor: pointer;
 }
@@ -48,7 +79,7 @@ header {
 }
 
 .pokemon {
-    background-color: #444; /* Cor de fundo dos Pokémon */
+    background-color: #444;
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 5px;
@@ -56,12 +87,11 @@ header {
 
 .pagination {
     text-align: center;
-    margin-top: 20px;
 }
 
 button {
-    background-color: #555; /* Cor de fundo do botão */
-    color: #fff; /* Cor do texto do botão */
+    background-color: #555;
+    color: #fff;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
@@ -69,10 +99,17 @@ button {
 }
 
 footer {
-    background-color: #222; /* Cor de fundo do rodapé */
+    color: #fff;
+    background-color: #222; 
     padding: 10px;
     text-align: center;
-    position: fixed;
     bottom: 0;
     width: 100%;
+    margin-top: 5rem;
+}
+
+@media screen and (max-width: 992px) {
+    header {
+        flex-direction: column;
+    }
 }
