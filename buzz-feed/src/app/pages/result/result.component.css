@@ -1,0 +1,18 @@
+/* result.component.css */
+
+.result-container {
+  max-width: 400px;
+  margin: auto;
+  padding: 20px;
+}
+
+.result-message {
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.result-score {
+  font-size: 24px;
+  color: var(--secondary-color);
+}
