@@ -1,19 +1,8 @@
-// quiz.component.ts
+import { Questions } from './../../data/question.data';
 
 import { Component } from '@angular/core';
-
-interface Question {
-  id: number;
-  text: string;
-  options: Option[];
-  selectedOption: string | null;
-  submitted: boolean;
-}
-
-interface Option {
-  text: string;
-  isCorrect: boolean;
-}
+import { Router } from '@angular/router';
+import { Question } from 'src/app/model/question.model';
 
 @Component({
   selector: 'app-quiz',
@@ -21,33 +10,9 @@ interface Option {
   styleUrls: ['./quiz.component.css']
 })
 export class QuizComponent {
-  questions: Question[] = [
-    {
-      id: 1,
-      text: 'Qual é a capital do Brasil?',
-      options: [
-        { text: 'Brasília', isCorrect: true },
-        { text: 'Rio de Janeiro', isCorrect: false },
-        { text: 'São Paulo', isCorrect: false },
-        { text: 'Belém', isCorrect: false }
-      ],
-      selectedOption: null,
-      submitted: false
-    },
-    {
-      id: 2,
-      text: 'Qual é o maior oceano do mundo?',
-      options: [
-        { text: 'Oceano Atlântico', isCorrect: false },
-        { text: 'Oceano Índico', isCorrect: false },
-        { text: 'Oceano Antártico', isCorrect: false },
-        { text: 'Oceano Pacífico', isCorrect: true }
-      ],
-      selectedOption: null,
-      submitted: false
-    },
-    // Adicione mais perguntas conforme necessário
-  ];
+
+  public constructor(private router: Router) { }
+  questions = Questions;
 
   currentQuestion: number = 1;
 
@@ -55,21 +20,60 @@ export class QuizComponent {
     if (!question.submitted) {
       question.selectedOption = selectedOption;
 
-      // Avaliação do quiz
-      if (question.selectedOption === question.options.find(option => option.isCorrect)?.text) {
+      const selectedOptionObject = question.options.find(option => option.text === selectedOption);
+
+      if (selectedOptionObject && selectedOptionObject.isCorrect) {
         console.log(`Pergunta ${question.id}: Resposta correta!`);
       } else {
         console.log(`Pergunta ${question.id}: Resposta incorreta. A resposta correta é ${question.options.find(option => option.isCorrect)?.text}.`);
       }
 
       question.submitted = true;
-
-      // Avançar para a próxima pergunta
       this.currentQuestion++;
     }
   }
 
   allQuestionsSubmitted(): boolean {
     return this.questions.every(question => question.submitted);
+  }
+
+  assignColors() {
+    this.questions.forEach(question => {
+      question.options.forEach((option, index) => {
+        option.color = this.generateColor(index);
+      });
+    });
+  }
+
+  generateColor(index: number): string {
+    const colors = ['red', 'blue', 'orange', 'green'];
+    return colors[index % colors.length];
+  }
+
+  navigateToResults() {
+    this.router.navigate(['/resultado'], {
+      queryParams: {
+        totalQuestions: this.questions.length,
+        correctAnswers: this.calculateCorrectAnswers(),
+        incorrectAnswers: this.calculateIncorrectAnswers()
+      }
+    });
+  }
+
+
+
+  calculateCorrectAnswers(): number {
+    return this.questions.reduce((count, question) => {
+      const correctOption = question.options.find(option => option.isCorrect);
+      return count + (question.selectedOption === correctOption?.text ? 1 : 0);
+    }, 0);
+  }
+
+  calculateIncorrectAnswers(): number {
+    return this.questions.length - this.calculateCorrectAnswers();
+  }
+
+  ngOnInit() {
+    this.assignColors();
   }
 }

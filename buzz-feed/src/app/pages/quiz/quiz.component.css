@@ -1,16 +1,37 @@
+/* quiz.component.css */
+
 .quiz-container {
   max-width: 800px;
   margin: 4rem auto;
 }
 
 .question-title {
+  position: relative;
   font-size: 1.2em;
   font-weight: bold;
   margin-bottom: 10px;
   text-align: center;
-  border: 1px solid red;
-  padding: 2rem 0;
+  border: var(--border-size) var(--border-color);
+  padding: 3rem 0;
   border-radius: var(--border-radius);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: var(--background-image);
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: inherit;
+  }
+}
+
+.question-title h3 {
+  filter: brightness(1.4);
 }
 
 .options-container {
@@ -24,25 +45,15 @@
   text-align: center;
   flex-basis: calc(50% - 10px);
   box-sizing: border-box;
-  border: 1px solid var(--primary-color);
   border-radius: 8px;
   padding: 2rem;
   margin: .7rem 0;
   cursor: pointer;
   transition: background-color 0.3s;
+  transition: all 0.3s;
 }
 
 .option:hover {
-  background-color: var(--primary-color);
-  color: #fff;
-}
-
-.option.selected {
-  background-color: #007bff;
-  color: #fff;
-}
-
-.option.correct {
-  background-color: #28a745;
-  color: #fff;
+  transform: scale(1.05);
+  transition: all 0.3s;
 }

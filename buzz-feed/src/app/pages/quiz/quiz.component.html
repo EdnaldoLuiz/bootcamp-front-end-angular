@@ -1,18 +1,22 @@
+<!-- quiz.component.html -->
+
 <div class="quiz-container">
   <div *ngFor="let question of questions" class="question-card" [ngClass]="{'hidden': currentQuestion !== question.id}">
-    <div class="question-title">
+    <div class="question-title" [ngStyle]="{'background-image': question.backgroundImage}">
       <h3>{{ question.text }}</h3>
     </div>
     <div class="options-container">
       <div *ngFor="let option of question.options"
-           class="option"
-           [ngClass]="{'selected': question.selectedOption === option.text, 'correct': question.selectedOption === option.text && option.isCorrect, 'disabled': question.submitted}"
-           (click)="selectOption(question, option.text)">
+        class="option"
+        [ngStyle]="{'background-color': option.color}"
+        [ngClass]="{'selected': question.selectedOption === option.text, 'correct': question.selectedOption === option.text && option.isCorrect, 'disabled': question.submitted}"
+        (click)="selectOption(question, option.text)">
         {{ option.text }}
       </div>
     </div>
   </div>
-  <div *ngIf="allQuestionsSubmitted()" class="final-message">
-    Parabéns! Você concluiu o quiz.
+  <div *ngIf="allQuestionsSubmitted()">
+    <button (click)="navigateToResults()">Show Results</button>
   </div>
+
 </div>

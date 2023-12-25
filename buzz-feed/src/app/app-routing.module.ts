@@ -6,7 +6,7 @@ import { ResultComponent } from './pages/result/result.component';
 const routes: Routes = [
   { path: '', redirectTo: '/quiz', pathMatch: 'full' },
   { path: 'quiz', component: QuizComponent },
-  { path: 'results', component: ResultComponent },
+  { path: 'resultado', component: ResultComponent },
 ];
 
 @NgModule({
